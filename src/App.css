@@ -1,0 +1,27 @@
+.app {
+  display: grid;
+  grid-template-areas:
+    'location'
+    'activities'
+    'forecast';
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .app {
+    min-height: 100vh;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 3rem;
+    grid-template-areas:
+      'location forecast'
+      'activities forecast';
+  }
+
+  .app > .activities {
+    align-self: end;
+  }
+}

@@ -1,0 +1,22 @@
+.forecast {
+  grid-area: forecast;
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.forecast__panel {
+  flex: 1;
+  min-height: 300px;
+  padding: 1.5rem;
+  background-color: var(--panel-bg);
+}
+
+.forecast__panel p {
+  margin: 0;
+  font-size: 1.1rem;
+}
