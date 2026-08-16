@@ -7,11 +7,17 @@
 :root {
   color-scheme: light dark;
   --panel-bg: #e9e9e9;
+  --panel-row-bg: #d6d6d6;
+  --panel-row-bg-selected: #b8b8b8;
+  --input-bg: #f2f2f2;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --panel-bg: #333333;
+    --panel-row-bg: #444444;
+    --panel-row-bg-selected: #5a5a5a;
+    --input-bg: #404040;
   }
 }
 

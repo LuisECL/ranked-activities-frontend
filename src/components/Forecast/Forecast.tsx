@@ -1,11 +1,16 @@
+import type { Geolocation } from '../../graphql/locations'
 import './Forecast.css'
 
-function Forecast() {
+interface ForecastProps {
+  location: Geolocation | null
+}
+
+function Forecast({ location }: ForecastProps) {
   return (
     <section className="forecast">
       <h2 className="forecast__title">Forecast:</h2>
       <div className="forecast__panel">
-        <p>Search for and select a location...</p>
+        <p>{location ? `Showing forecast for ${location.name}...` : 'Search for and select a location...'}</p>
       </div>
     </section>
   )
