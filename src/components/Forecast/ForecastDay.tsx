@@ -11,7 +11,7 @@ interface ForecastDayProps {
 function ForecastDay({ day }: ForecastDayProps) {
   const date = new Date(`${day.day}T00:00:00`)
   const weekday = date.toLocaleDateString('en-US', { weekday: 'short' })
-  const formattedDate = `${String(date.getDate()).padStart(2, '0')}-${MONTHS[date.getMonth()]}-${String(date.getFullYear()).slice(-2)}`
+  const formattedDate = `${MONTHS[date.getMonth()]}-${String(date.getDate()).padStart(2, '0')}`
 
   return (
     <li className="forecast-day">
