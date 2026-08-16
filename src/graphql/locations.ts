@@ -8,6 +8,7 @@ export interface Geolocation {
   country: string
   admin_level_1: string
   admin_level_2: string | null
+  timezone: string
 }
 
 export interface SearchLocationsData {
@@ -28,6 +29,7 @@ export const SEARCH_LOCATIONS: TypedDocumentNode<SearchLocationsData, SearchLoca
       country
       admin_level_1
       admin_level_2
+      timezone
     }
   }
 `
