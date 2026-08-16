@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client/react'
 import { SEARCH_LOCATIONS, type Geolocation } from '../../graphql/locations'
+import LocationResults from './LocationResults'
 import './Location.css'
 
 interface LocationProps {
@@ -18,9 +19,11 @@ function Location({ query, onQueryChange, selectedLocation, onSelect }: Location
     return () => clearTimeout(timeout)
   }, [query])
 
-  const { data } = useQuery(SEARCH_LOCATIONS, {
+  const hasQuery = debouncedQuery.trim().length >= 2
+
+  const { data, loading } = useQuery(SEARCH_LOCATIONS, {
     variables: { q: debouncedQuery },
-    skip: debouncedQuery.trim().length < 2,
+    skip: !hasQuery,
   })
 
   const results = data?.searchLocations?.filter((location): location is Geolocation => location !== null) ?? []
@@ -36,31 +39,13 @@ function Location({ query, onQueryChange, selectedLocation, onSelect }: Location
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
         />
-        {results.length > 0 && (
-          <ul className="location__results">
-            {results.map((location) => (
-              <li key={location.id}>
-                <button
-                  type="button"
-                  className={
-                    location.id === selectedLocation?.id
-                      ? 'location__result location__result--selected'
-                      : 'location__result'
-                  }
-                  onClick={() => onSelect(location)}
-                >
-                  <span className="location__result-name">
-                    {location.name}, {location.country}
-                  </span>
-                  <span className="location__result-admin">
-                    {location.admin_level_2
-                      ? `${location.admin_level_1}, ${location.admin_level_2}`
-                      : location.admin_level_1}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
+        {hasQuery && (
+          <LocationResults
+            loading={loading}
+            results={results}
+            selectedLocation={selectedLocation}
+            onSelect={onSelect}
+          />
         )}
       </div>
     </section>

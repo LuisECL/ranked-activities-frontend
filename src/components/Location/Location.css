@@ -29,52 +29,9 @@
   color: inherit;
 }
 
-.location__results {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-  max-height: 260px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.location__result {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: none;
-  background-color: var(--panel-row-bg);
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.location__result--selected {
-  background-color: var(--panel-row-bg-selected);
-}
-
-.location__result-name {
-  font-size: 1.1rem;
-}
-
-.location__result-admin {
-  font-size: 0.85rem;
-  opacity: 0.7;
-}
-
 @media (min-width: 768px) {
   .location__panel {
     flex: 1;
     min-height: 0;
-  }
-
-  .location__results {
-    flex: 1;
-    max-height: none;
   }
 }
