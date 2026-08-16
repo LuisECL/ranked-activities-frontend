@@ -1,0 +1,15 @@
+.forecast-activities {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.forecast-activities__item {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}

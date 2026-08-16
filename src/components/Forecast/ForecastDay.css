@@ -1,0 +1,58 @@
+.forecast-day {
+  list-style: none;
+  min-width: 0;
+  padding: 1rem;
+  background-color: var(--panel-row-bg);
+}
+
+.forecast-day__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.forecast-day__date-group {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.forecast-day__weekday {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.forecast-day__date {
+  font-size: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.forecast-day__weather {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.forecast-day__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--panel-row-bg-selected);
+}
+
+.forecast-day__description {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 768px) {
+  .forecast-day__header {
+    justify-content: flex-start;
+  }
+
+  .forecast-day__weather {
+    align-items: flex-start;
+  }
+}
