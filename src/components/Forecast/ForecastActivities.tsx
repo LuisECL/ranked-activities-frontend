@@ -1,18 +1,9 @@
 import { ACTIVITY_LABELS, type ActivityScore } from '../../graphql/forecast'
+import { getScoreIcon } from './scoreIcon'
 import './ForecastActivities.css'
 
 interface ForecastActivitiesProps {
   activities: ActivityScore[]
-}
-
-function getScoreIcon(score: number) {
-  if (score >= 3) {
-    return { symbol: '✓✓', modifier: 'forecast-activities__icon--high', label: 'Great conditions' }
-  }
-  if (score >= 0) {
-    return { symbol: '✓', modifier: 'forecast-activities__icon--medium', label: 'Good conditions' }
-  }
-  return { symbol: '✕', modifier: 'forecast-activities__icon--low', label: 'Poor conditions' }
 }
 
 function ForecastActivities({ activities }: ForecastActivitiesProps) {

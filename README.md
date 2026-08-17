@@ -10,6 +10,7 @@ React + TypeScript + Vite Single Page Application, no UI framework or component 
 - **Location search**: debounced (300ms) and gated behind a 2-character minimum before firing a query, to avoid a request per keystroke.
 - **Activity filtering**: checking/unchecking an activity drives the `only` argument on the nested `activities` field of `getWeeklyForecast`, so unticking an activity removes it from every returned day server-side rather than just hiding it client-side (purposeful choice merely to expand GraphQL usage).
 - **Layout**: CSS Grid on the app shell. Mobile stacks Location/Activities/Forecast vertically; `≥768px` switches to a two-column layout.
+- **Testing**: Vitest + React Testing Library, `jsdom` environment. Covers the presentational/logic-bearing components (`Activities`, `LocationResults`, `ForecastDay`, `ForecastActivities`, `getScoreIcon`) with plain unit/component tests, no GraphQL network mocking, run via `npm test`.
 
 ## How AI assisted
 
@@ -18,6 +19,7 @@ Built entirely with Claude Code as a pair-programming assistant throughout:
 - Wireframe screenshots (mobile + tablet) were fed to the assistant to scaffold component structure and CSS Grid/Flexbox layout, and for some layout corrections.
 - The backend's GraphQL `typeDefs` were pasted in directly so the assistant could hand-write matching typed queries and TS interfaces instead of guessing the shape.
 - Every screen/interaction was verified by the assistant launching the Vite dev server and driving it with a headless browser (Playwright).
+- Vitest + React Testing Library were set up and the unit/component test suite was written by the assistant, then run to confirm everything passed alongside `tsc` and `eslint`.
 - All UX/architecture decisions (state placement, component boundaries, breakpoint behavior, what to omit) were directed and reviewed at each step, never accepted "as-is".
 
 ## Omissions & Trade-offs
@@ -27,7 +29,7 @@ Built entirely with Claude Code as a pair-programming assistant throughout:
 - **No real weather icons**: the forecast day's weather icon and the activity-score icons (✓✓ / ✓ / ✕) are flat-color placeholders, not illustrated icons mapped from `weather_code`.
 - **No error UI**: `useQuery`'s `error` state isn't surfaced anywhere (Location search or Forecast); a failed request just renders as "No results" / "No forecast available".
 - **No cache/fetch-policy tuning beyond Apollo's defaults**: `cache-first` is used as-is.
-- **No tests**: no unit/component tests were added for the frontend (unlike the backend, which has Jest coverage). Skipped given time constraints, prioritizing wiring the full search → select → forecast flow end-to-end.
+- **No Apollo-mocked or end-to-end tests**: unit/component tests cover the presentational components in isolation (see Architecture), but nothing exercises `Location`/`Forecast` against a mocked `MockedProvider`, the search debounce timing, or the full search → select → forecast flow end-to-end.
 - **No accessibility pass beyond basics**: results/checkboxes are real `<input>` / `<button>` elements (keyboard/focus work) and the weather/activity-score icons carry `role="img"` + `aria-label` text alternatives, but there's still no live region announcing loading/result changes as they happen.
 
 ### Shortcuts taken and how I'd fix them
