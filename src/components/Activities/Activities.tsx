@@ -1,17 +1,7 @@
-import type { Activity } from '../../graphql/forecast'
+import { ACTIVITY_LABELS, type Activity } from '../../graphql/forecast'
 import './Activities.css'
 
-interface ActivityOption {
-  value: Activity
-  label: string
-}
-
-const ACTIVITY_OPTIONS: ActivityOption[] = [
-  { value: 'SKIING', label: 'Skiing' },
-  { value: 'SURFING', label: 'Surfing' },
-  { value: 'OUTDOORS_SIGHTSEEING', label: 'Outdoors sightseeing' },
-  { value: 'INDOORS_SIGHTSEEING', label: 'Indoors Sightseeing' },
-]
+const ACTIVITY_OPTIONS = Object.entries(ACTIVITY_LABELS) as [Activity, string][]
 
 interface ActivitiesProps {
   selected: Activity[]
@@ -23,15 +13,11 @@ function Activities({ selected, onToggle }: ActivitiesProps) {
     <section className="activities">
       <h2 className="activities__title">Activities:</h2>
       <ul className="activities__list">
-        {ACTIVITY_OPTIONS.map((option) => (
-          <li key={option.value} className="activities__item">
+        {ACTIVITY_OPTIONS.map(([value, label]) => (
+          <li key={value} className="activities__item">
             <label>
-              <input
-                type="checkbox"
-                checked={selected.includes(option.value)}
-                onChange={() => onToggle(option.value)}
-              />
-              {option.label}
+              <input type="checkbox" checked={selected.includes(value)} onChange={() => onToggle(value)} />
+              {label}
             </label>
           </li>
         ))}

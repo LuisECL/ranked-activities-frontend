@@ -2,6 +2,13 @@ import { gql, type TypedDocumentNode } from '@apollo/client'
 
 export type Activity = 'SKIING' | 'SURFING' | 'OUTDOORS_SIGHTSEEING' | 'INDOORS_SIGHTSEEING'
 
+export const ACTIVITY_LABELS: Record<Activity, string> = {
+  SKIING: 'Skiing',
+  SURFING: 'Surfing',
+  OUTDOORS_SIGHTSEEING: 'Outdoors sightseeing',
+  INDOORS_SIGHTSEEING: 'Indoors Sightseeing',
+}
+
 export interface ActivityScore {
   activity: Activity
   score: number

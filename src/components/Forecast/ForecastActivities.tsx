@@ -1,12 +1,5 @@
-import type { Activity, ActivityScore } from '../../graphql/forecast'
+import { ACTIVITY_LABELS, type ActivityScore } from '../../graphql/forecast'
 import './ForecastActivities.css'
-
-const ACTIVITY_LABELS: Record<Activity, string> = {
-  SKIING: 'Skiing',
-  SURFING: 'Surfing',
-  OUTDOORS_SIGHTSEEING: 'Outdoors sightseeing',
-  INDOORS_SIGHTSEEING: 'Indoors Sightseeing',
-}
 
 interface ForecastActivitiesProps {
   activities: ActivityScore[]
@@ -14,12 +7,12 @@ interface ForecastActivitiesProps {
 
 function getScoreIcon(score: number) {
   if (score >= 3) {
-    return { symbol: '✓✓', modifier: 'forecast-activities__icon--high' }
+    return { symbol: '✓✓', modifier: 'forecast-activities__icon--high', label: 'Great conditions' }
   }
   if (score >= 0) {
-    return { symbol: '✓', modifier: 'forecast-activities__icon--medium' }
+    return { symbol: '✓', modifier: 'forecast-activities__icon--medium', label: 'Good conditions' }
   }
-  return { symbol: '✕', modifier: 'forecast-activities__icon--low' }
+  return { symbol: '✕', modifier: 'forecast-activities__icon--low', label: 'Poor conditions' }
 }
 
 function ForecastActivities({ activities }: ForecastActivitiesProps) {
@@ -36,7 +29,7 @@ function ForecastActivities({ activities }: ForecastActivitiesProps) {
 
         return (
           <li key={activityScore.activity} className="forecast-activities__item">
-            <span className={`forecast-activities__icon ${icon.modifier}`} aria-hidden="true">
+            <span className={`forecast-activities__icon ${icon.modifier}`} role="img" aria-label={icon.label}>
               {icon.symbol}
             </span>
             <span className="forecast-activities__meta">

@@ -21,7 +21,7 @@ function ForecastDay({ day }: ForecastDayProps) {
           <span className="forecast-day__date">{formattedDate}</span>
         </div>
         <div className="forecast-day__weather">
-          <span className="forecast-day__icon" aria-hidden="true" />
+          <span className="forecast-day__icon" role="img" aria-label={day.weather_description} />
           <span className="forecast-day__description">{day.weather_description}</span>
         </div>
       </div>
