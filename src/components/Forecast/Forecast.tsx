@@ -7,9 +7,10 @@ import './Forecast.css'
 interface ForecastProps {
   location: Geolocation | null
   activities: Activity[]
+  locationQuery: string
 }
 
-function Forecast({ location, activities }: ForecastProps) {
+function Forecast({ location, activities, locationQuery }: ForecastProps) {
   const { data, loading } = useQuery(GET_WEEKLY_FORECAST, {
     variables: {
       latitude: location?.latitude ?? 0,
@@ -26,7 +27,7 @@ function Forecast({ location, activities }: ForecastProps) {
     <section className="forecast">
       <h2 className="forecast__title">Forecast:</h2>
       <div className="forecast__panel">
-        {!location && <p>Search for and select a location...</p>}
+        {!location && <p>{locationQuery.trim() === '' ? 'Search for and select a location...' : 'Select a location'}</p>}
         {location && loading && <p>Loading...</p>}
         {location && !loading && days.length === 0 && <p>No forecast available</p>}
         {location && !loading && days.length > 0 && (

@@ -19,16 +19,21 @@ function App() {
     )
   }
 
+  const handleQueryChange = (value: string) => {
+    setLocationQuery(value)
+    setSelectedLocation(null)
+  }
+
   return (
     <div className="app">
       <Location
         query={locationQuery}
-        onQueryChange={setLocationQuery}
+        onQueryChange={handleQueryChange}
         selectedLocation={selectedLocation}
         onSelect={setSelectedLocation}
       />
       <Activities selected={selectedActivities} onToggle={handleToggleActivity} />
-      <Forecast location={selectedLocation} activities={selectedActivities} />
+      <Forecast location={selectedLocation} activities={selectedActivities} locationQuery={locationQuery} />
     </div>
   )
 }
